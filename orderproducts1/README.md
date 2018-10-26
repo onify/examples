@@ -1,4 +1,4 @@
-| This example requires Onify Hub version 1.21 or later
+> This example requires Onify Hub version 1.21 or later
 
 # Order products example
 
