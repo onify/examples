@@ -1,0 +1,58 @@
+[{
+    "description" : "Apple iPhone 8 Plus 64GB",
+    "type" : "product",
+    "cost" : {
+        "payment" : "purchase",
+        "price" : 100
+    },
+    "icon" : "/icons/mobile-phone.svg",
+    "name" : "iOS Mobile Phone",
+    "tag" : [
+        "product",
+        "mobile",
+        "apple"
+    ],
+    "attribute" : {
+        "category" : "Mobile",
+        "model" : "iPhone 8 Plus 64GB",
+        "manufacturer" : "Apple"
+    },
+    "action" : [{
+            "bulksupported" : true,
+            "url" : "/form/order-products",
+            "name" : "Request",
+            "order" : 1,
+            "id" : "request"
+        }
+    ],
+    "key" : "apple1"
+}, {
+    "description" : "Samsung Galaxy Note9",
+    "type" : "product",
+    "cost" : {
+        "payment" : "purchase",
+        "price" : 100
+    },
+    "icon" : "/icons/mobile-phone.svg",
+    "name" : "Android Mobile Phone",
+    "tag" : [
+        "product",
+        "mobile",
+        "apple"
+    ],
+    "attribute" : {
+        "category" : "Mobile",
+        "model" : "Galaxy Note9",
+        "manufacturer" : "Samsung"
+    },
+    "action" : [{
+            "bulksupported" : true,
+            "url" : "/form/order-products",
+            "name" : "Request",
+            "order" : 1,
+            "id" : "request"
+        }
+    ],
+    "key" : "samsung1"
+}
+]

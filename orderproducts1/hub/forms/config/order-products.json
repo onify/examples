@@ -1,0 +1,35 @@
+{
+    "title": "Order products",
+    "template": "order-products",
+    "path": {
+      "submit": {
+        "template": "order-products-confirmation",
+        "webhook": {
+          "method": "POST",
+          "url": "https://workflow.company.com/order-products",
+          "body": {
+            "RequestedByEmail": "{{submit.requestedby_email}}",
+            "RequestedByName": "{{user.name}}",
+            "RequestedByUserID": "{{user.username}}",
+            "RequestedByPhone": "{{submit.requestedby_phone}}",
+            "RequestedByDepartment": "{{user.custom.department}}",
+            "UserEmail": "{{form.submit.item.user.[0].attribute.mail}}",
+            "UserName": "{{form.submit.item.user.[0].name}}",
+            "UserUserID": "{{form.submit.item.user.[0].key}}",
+            "UserDepartment": "{{form.submit.item.user.[0].attribute.avdelning}}",
+            "ApproverEmail": "{{form.submit.item.attest.[0].attribute.mail}}",
+            "ApproverUserID": "{{form.submit.item.attest.[0].key}}",
+            "ApproverName": "{{form.submit.item.attest.[0].name}}",
+            "ApproverAttestID": "{{form.submit.item.attest.[0].attribute.attest_id}}",
+            "ApproverMotpart": "{{form.submit.item.attest.[0].attribute.motpart}}",
+            "ApproverDepartment": "{{form.submit.item.attest.[0].attribute.avdelning}}",
+            "Notes": "{{submit.otherinfo}}",
+            "Products": "{{#array submit.products}}{{name}}|{{price}}|{{amount}}|{{articlenumber}};{{/array}}"
+          },
+          "responseType": "xml",
+          "contentType": "application/x-www-form-urlencoded"
+        }
+      }
+    },
+    "slug": "order-products"
+  }

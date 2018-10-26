@@ -1,0 +1,95 @@
+extends ../views/form/default-form
+
+block append formConfig
+	+formOptions({
+		submitButtonName: "Request products"
+	})
+
+block formContent
+	h4 Products
+	div
+		+formElementsTable({
+				rows: form.items.map(function(item) {
+					return {
+						name: {
+							value: item.name
+						},
+						articlenumber: {
+							value: item.key
+						},
+						price: {
+							value: item.cost.price + " EUR"
+						},
+						amount: {
+							value: "1"
+						
+					}
+				}),
+			name: "products",
+			header: [{
+				width: "col-md-4",
+				label: "Product"
+			}, {
+				width: "col-md-2",
+				label: "Article number"
+			}, {
+				width: "col-md-2",
+				label: "Price"
+			}, {
+				width: "col-md-1",
+				label: "Amount"
+			}],
+			elements: [
+				{
+				width: "col-md-4",
+				type: "simpleText",
+				name: "name"
+			},{
+				width: "col-md-2",
+				type: "simpleText",
+				name: "articlenumber",
+			},{
+				width: "col-md-2",
+				type: "simpleText",
+				name: "price",
+			},{
+				width: "col-md-1",
+				name: "amount",
+				pattern: "[1-9]{1}[0-9]{0,1}",
+				required: true
+			}]
+		})
+
+	h4 Requester
+	div
+		+formElement({
+			name: 'requestedby_name',
+			label: "Name",
+			value: user.name,
+			readonly: true
+		})
+
+		+formElement({
+			name: 'requestedby_email',
+			label: "Email",
+			required: true,
+			value: user.email
+		})
+
+		+formElement({
+			name: 'requestedby_phone',
+			label: "Phone",
+			required: true,
+			value: user.custom.phone
+		})
+
+
+	h4 Additional
+	div
+		+formElement({
+			type: 'textarea',
+			name: 'otherinfo',
+			label: "Other information",
+			rows: 3
+		})
+		
