@@ -1,12 +1,13 @@
 param(
 	[Parameter(mandatory=$false)]
-	[string]$OnifyTaskID # The taskid to update logs for (default variable from the agent task)
+    [string]$onifytaskid,
+	[Parameter(mandatory=$false)]
+    [string]$onifyusertoken
 )
 
-$config = Get-Content -Raw -Path "$PSScriptRoot\..\config.json" -Encoding "UTF8" | ConvertFrom-Json
-$onify_tasklog_uri = $config.hub_url + "/api/v1/my/agent/task/$OnifyTaskID/log"
+$onify_tasklog_uri = "https://api.onify.company.com/api/v1/my/agent/task/$onifytaskid/log"
 $onify_headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-$onify_headers.Add("Authorization", $config.hub_token)
+$onify_headers.Add("Authorization", $onifyusertoken)
 
 foreach($i in 1..10) {
     $level = "info"
@@ -14,7 +15,7 @@ foreach($i in 1..10) {
     if ($i -eq 10) { $level = "error" }
     $body = @{
         message = "Testing $i"
-        info = $level
+        level = $level
     }
     $json = $body | ConvertTo-Json
     $r = Invoke-RestMethod -Method PUT -Uri $onify_tasklog_uri -Headers $onify_headers -Body ([System.Text.Encoding]::UTF8.GetBytes($json)) -ContentType application/json

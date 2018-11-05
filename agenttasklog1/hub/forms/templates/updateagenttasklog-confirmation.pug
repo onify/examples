@@ -3,13 +3,11 @@ extends ../views/form/default-confirmation-form
 block formContent
   +formElement({
     type: "agentTaskLog",
-    taskid: response.agenttask.id,
     autorefresh: 2000
   })  
 
   +formElement({
     type: "agentTaskSubmitResult",
-    taskid: response.agenttask.id,
     loadingText: "Please wait while we do stuff. It could take up to X minutes.",
     autorefresh: 2000
   })
