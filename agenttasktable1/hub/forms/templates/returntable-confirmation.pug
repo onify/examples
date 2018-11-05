@@ -1,0 +1,9 @@
+extends ../views/form/default-confirmation-form
+
+block formContent
+  +formElement({
+    type: "agentTaskSubmitResult",
+    format: "table",
+    tableHeader: "Program,Publisher,Version"
+    loadingText: "Please wait while generate the ARP report...",
+  })
