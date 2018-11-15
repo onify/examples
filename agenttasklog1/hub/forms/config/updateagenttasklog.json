@@ -1,0 +1,22 @@
+﻿{
+  "title": "Test agent task log",
+  "template": "updateagenttasklog",
+  "path": {
+    "submit": {
+      "template": "updateagenttasklog-confirmation",
+      "agenttask": {
+        "command": "updateagenttasklog",
+        "async": true,
+        "tag": [
+          "agent"
+        ],
+        "vars": [
+          "-onifytaskid '{{taskid}}'",
+          "-onifyusertoken '{{user.token}}'"
+        ]
+      }
+    }
+  },
+  "test": false,
+  "slug": "updateagenttasklog"
+}
