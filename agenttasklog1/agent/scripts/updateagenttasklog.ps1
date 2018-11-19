@@ -18,6 +18,7 @@ foreach($i in 1..10) {
         level = $level
     }
     $json = $body | ConvertTo-Json
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 # Onify requires TLS 1.2 but is not enabled default in PowerSHell
     $r = Invoke-RestMethod -Method PUT -Uri $onify_tasklog_uri -Headers $onify_headers -Body ([System.Text.Encoding]::UTF8.GetBytes($json)) -ContentType application/json
     Start-Sleep 1
 }
