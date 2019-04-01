@@ -2,12 +2,10 @@ extends ../views/form/default-confirmation-form
 
 block formContent
   +formElement({
-    type: "agentTaskLog",
-    autorefresh: 2000
+    type: "agentTaskLog"
   })  
 
   +formElement({
     type: "agentTaskSubmitResult",
-    loadingText: "Please wait while we do stuff. It could take up to X minutes.",
-    autorefresh: 2000
+    loadingText: "Please wait while we do stuff. It could take up to X minutes."
   })
