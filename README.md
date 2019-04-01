@@ -4,12 +4,12 @@ This repo contains some examples how to use Onify i different use cases and scen
 # Examples
 
 ## Agent task log example
-This is an example that shows how we can display agent task logs (from a script) in a form.
+This is an example that shows how we can display agent task logs (from a script) in a form using Powershell script.
 
 https://github.com/onify/hub-examples/tree/master/agenttasklog1
 
 ## Agent task table response example
-Display the agent task response as a table. The response be compressed json array.
+Display the agent task response from a Powershell script as a HTML table. The response be compressed json array.
 
 https://github.com/onify/hub-examples/tree/master/agenttasktable1
 
