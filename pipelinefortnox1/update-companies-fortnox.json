@@ -1,0 +1,113 @@
+{
+  "name": "Update companies from Fortnox (Delta)",
+  "key": "update-companies-fortnox",
+  "tasks": [
+    {
+      "tasktype": "reader",
+      "task": {
+        "name": "Get companies from Fortnox",
+        "datasourcetype": "rest",
+        "datasource": {
+          "name": "Fortnox - Customers",
+          "host": "api.fortnox.se",
+          "scheme": "https",
+          "timeout": "30",
+          "method": "get",
+          "pagination": {
+            "paginationtype": "offset",
+            "offsetparam": "offset",
+            "totalfield": "MetaInformation.\"@TotalResources\""
+          },
+          "headers": [
+            {
+              "id": "87d9",
+              "key": "access-token",
+              "value": "***"
+            },
+            {
+              "id": "8427",
+              "key": "client-secret",
+              "value": "***"
+            }
+          ],
+          "recordspath": "Customers",
+          "id": "4fce5c21"
+        },
+        "query": "/3/customers/?limit=1000&filter=active",
+        "outvariable": "fortnox_companies",
+        "loop": false,
+        "id": "f4960ef3"
+      },
+      "order": 4,
+      "required": true,
+      "id": "69b1"
+    },
+    {
+      "tasktype": "reader",
+      "task": {
+        "name": "Get company details from Fortnox",
+        "datasourcetype": "rest",
+        "datasource": {
+          "name": "Fortnox - Customer",
+          "host": "api.fortnox.se",
+          "scheme": "https",
+          "timeout": "30",
+          "method": "get",
+          "pagination": {
+            "paginationtype": "none"
+          },
+          "headers": [
+            {
+              "id": "87d9",
+              "key": "access-token",
+              "value": "***"
+            },
+            {
+              "id": "8427",
+              "key": "client-secret",
+              "value": "***"
+            }
+          ],
+          "recordspath": "Customer",
+          "id": "155d57b0"
+        },
+        "query": "/3/customers/#CustomerNumber#",
+        "outvariable": "fortnox_companies_details",
+        "loop": true,
+        "loopvariable": "fortnox_companies",
+        "id": "f0e7d434"
+      },
+      "order": 5,
+      "required": true,
+      "id": "5147"
+    },
+    {
+      "tasktype": "transform",
+      "task": {
+        "name": "Map Fortnox fields",
+        "endpointtype": "item",
+        "invariable": "fortnox_companies_details",
+        "mapping": "{\"key\": \"co#CustomerNumber#\",\"attribute.invoiceaddress\": \"#Address1#\",\"attribute.invoicezipcode\": \"#ZipCode#\",\"attribute.invoicecity\": \"#City#\",\"attribute.invoiceemail\": \"#EmailInvoice#\",\"attribute.your_reference\": \"#YourReference#\",\"attribute._fortnox\": \"#CustomerNumber#\"}",
+        "outvariable": "fortnox_companies_transformed",
+        "id": "f1fe4cbe"
+      },
+      "order": 6,
+      "required": true,
+      "id": "9f9b"
+    },
+    {
+      "tasktype": "index",
+      "task": {
+        "name": "Update companies from Fortnox",
+        "endpointtype": "item",
+        "indexmethod": "patch",
+        "invariable": "fortnox_companies_transformed",
+        "alwaysupdate": true,
+        "id": "ddd58829"
+      },
+      "order": 7,
+      "required": true,
+      "id": "2b7b"
+    }
+  ]
+}
