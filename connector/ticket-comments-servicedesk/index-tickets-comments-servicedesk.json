@@ -1,0 +1,43 @@
+{
+  "name": "Index incident comments from ServiceDesk",
+  "key": "incident-comments",
+  "tasks": [
+    {
+      "tasktype": "reader",
+      "task": {
+        "name": "Get incident comments",
+        "datasourcetype": "sql",
+        "datasource": {
+          "name": "Symantec ServiceDesk",
+          "host": "sddb.acme.com",
+          "sqltype": "mssql",
+          "database": "ProcessManager",
+          "timeout": 30,
+          "encrypt": false,
+          "id": "45e38b36"
+        },
+        "query": "SELECT * FROM vwOnifyIncidentComments",
+        "outvariable": "comments",
+        "loop": false,
+        "id": "0e5a87fe"
+      },
+      "order": 1,
+      "required": true,
+      "id": "bc50"
+    },
+    {
+      "tasktype": "index",
+      "task": {
+        "name": "Index comments",
+        "endpointtype": "event",
+        "indexmethod": "put",
+        "invariable": "comments",
+        "alwaysupdate": false,
+        "id": "2e260ae9"
+      },
+      "order": 2,
+      "required": true,
+      "id": "64f4"
+    }
+  ]
+} 

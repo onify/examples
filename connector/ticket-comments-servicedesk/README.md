@@ -1,0 +1,1 @@
+Example connector pipeline that index comments as events from Symantec ServiceDesk SQL database.
