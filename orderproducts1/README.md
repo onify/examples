@@ -1,6 +1,4 @@
-> This example requires Onify Hub version 1.20.20 or later
-
-# Order products example
+Example how users can order products via Onify.
 
 1. Import items (./hub/items/products.json)
 2. Add pug templates (./hub/forms/templates/order-products.pug)
