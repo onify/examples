@@ -1,0 +1,190 @@
+extends ../../views/form/default-form
+	
+block append formConfig
+	+formOptions({
+	    formDescription: "",
+	    pageTitle: t('form.openshift.page_title'),
+	    formTitle: t('form.openshift.form_title'),
+	    submitButtonName: t('form.openshift.submit_button_name'),
+	    backButtonName: t('app.goback')
+	})
+	
+block formContent
+
+	h3  #{t('form.openshift.project_owner_information_header')} 
+	br
+	
+	+formElement({
+		type: "itemSelect",
+		name: "responsible",
+		label: t('form.openshift.project_responsible'),
+		required: true,
+		lookup: {
+			workspace: 'lookup',
+			type: 'item',
+			query: "filter=type:user&filter=tag:esb&term={searchstring}",
+			sort: "name,asc",
+			result: {
+				value: "{item.key}",
+				label: "{item.attribute.full_name}, {item.attribute.username}, {item.attribute.email}"
+			}
+		}
+	})
+	
+	+formElement({
+		type: "itemSelect",
+		name: "owner",
+		label: t('form.openshift.project_owner'),
+		required: true,
+		lookup: {
+			workspace: 'lookup',
+			type: 'item',
+			query: "filter=type:user&filter=tag:esb&term={searchstring}",
+			sort: "name,asc",
+			result: {
+				value: "{item.key}",
+				label: "{item.attribute.full_name}, {item.attribute.username}, {item.attribute.email}"
+			}
+		}
+	})
+	
+	
+	+formElementsTable({
+		rows: [{}],
+		name: "technicalContacts",
+		hideAddButton: false,
+		hideRemoveButton: false,
+		reload: true,
+		removeButtonName: t('form.general.remove_button'),
+		header: [{
+			width: "col-md-10",
+			label: t('form.openshift.technical_contacts')
+		}],
+		elements: [{
+			width: "col-md-10",
+			name: "username",
+			type: "itemSelect",
+			search: true,
+			lookup: {
+				type: "item",
+				workspace: "lookup",
+				query: "filter=type:user&filter=tag:esb&term={searchstring}",
+				sort: "name,asc",
+				result: {
+					value: "{item.key}",
+					label: "{item.attribute.full_name} ({item.attribute.costcenter}), {item.attribute.email}"
+				}
+			}
+		}]
+	})
+	
+	+formElement({
+		type: "textField",
+		name: "IDMGroup",
+		label: t('form.openshift.idm_group'),
+		pattern: "^([a-z0-9][-]?){6,32}$",
+		helpText: t('form.openshift.idm_group_helptext'),
+		required: true
+	})
+	
+		
+	br
+	
+	h3  #{t('form.openshift.project_information_header')} 
+	br
+	
+	+formElement({
+		type: "textField",
+		name: "projectName",
+		required: true,
+		label: t('form.openshift.project_name'),
+		helpText: t('form.openshift.project_name_helptext'),
+		pattern: "^((?!default)(?!openshift)(?!kube)[a-zA-Z0-9-])*$"
+	})
+	
+	br
+	
+	+formElement({
+		type: "textarea",
+		name: "description",
+		label: t("form.openshift.project_description_label"),
+		rows: '3',
+		required: true
+	})
+	
+
+	+formElement({
+		type: "textField",
+		name: "softwareFolderLink",
+		label: t('form.openshift.link_to_softwarefolder'),
+		helpText: t('form.openshift.link_to_softwarefolder_helptext'),
+		required: true
+	})
+	
+	br
+	
+	h3  #{t('form.openshift.project_technical_information_header')} 
+	br
+	
+	+formGroup([{
+		name: "cpuQuota",
+		type: "number",
+		label: t('form.openshift.project_cpu_quota'),
+		helpText: t('form.openshift.project_cpu_quota_helptext'),
+		width: "col-md-6",
+		max: 2,
+		step: 0.5,
+		value: 1,
+		min: 0.5,
+		required: true
+	},{
+		name: "projectMemory",
+		type: "number",
+		required: true,
+		label: t('form.openshift.project_memory'),
+		helpText: t('form.openshift.project_memory_helptext'),
+		width: "col-md-6",
+		max: 5000,
+		step: 100,
+		value: 500,
+		min: 100
+	}])
+		
+	+formGroup([{
+		type: "checkbox",
+		name: "pvcBool",
+		checkboxLabel: t('form.openshift.pvc_bool'),
+		width: "col-md-6"
+	}, {
+		type: "number",
+		name: "pvcSize",
+		max: 20,
+		value: 10,
+		step: 1,
+		min: 1,
+		label: t('form.openshift.pvc_size'),
+		required: {
+			ifField: "pvcBool",
+			hasValue: true
+		},
+		visible: {
+			ifField: "pvcBool",
+			hasValue: true
+		},
+		width: "col-md-6"
+	}])
+	
+	+formElement({
+		type: "link",
+		name: "infobtn",
+		button: true,
+		class: "btn-info",
+		value: t('form.openshift.container_wiki'),
+		helpText: t('form.openshift.container_wiki_helptext'),
+		url: "https://wiki.company.com/openshift",
+		target: "_blank"
+	})
+	
+	br
+	br
+	
