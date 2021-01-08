@@ -8,6 +8,4 @@ win.send_keys_to_input("https://www.google.com")
 win.send_keys_to_input("RPA{SPACE}is{SPACE}cool")
 win.screenshot("desktop.png", desktop=True, overwrite=True)
 #win.close_all_applications
-
-
-
+print("Done!")
