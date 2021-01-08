@@ -13,7 +13,7 @@ from RPA.Word.Application import Application
 orgnr = args.orgnr
 name = args.name
 ceo = args.ceo
-input_filename = 'template.docx'
+input_filename = '/temp/template.docx'
 output_filename = '/temp/new.docx'
 
 # --- TASKS ---
@@ -25,3 +25,4 @@ app.replace_text("$CEO$", ceo)
 app.replace_text("$ORGNR$", orgnr)
 app.save_document_as(output_filename)
 app.quit_application()
+print("Done!")
