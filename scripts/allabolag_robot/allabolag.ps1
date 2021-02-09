@@ -1,4 +1,4 @@
-﻿param(
+param(
 	[Parameter(mandatory=$true)]
     [string]$orgnr
 )
@@ -7,7 +7,7 @@
 
 $Driver = Start-SeFirefox -StartURL "https://www.allabolag.se" -Quiet
 
-$searchBox = $Driver.FindElementByXPath('/html/body/div[6]/div[2]/div/div[1]/header/div/div[1]/div[1]/div[2]/form/div/input');
+$searchBox = $Driver.FindElementByXPath('/html/body/div[4]/div[2]/div/div[1]/header/div/div[1]/div[1]/div[2]/form/div/input');
 Send-SeKeys -Element $searchBox -Keys $orgnr
 Send-SeKeys -Element $searchBox -Keys ([OpenQA.Selenium.Keys]::Enter)
 
