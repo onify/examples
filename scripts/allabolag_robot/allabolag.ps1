@@ -15,3 +15,5 @@ $ceoElement = $Driver.FindElementByXPath('/html/body/div[4]/div[5]/div/div[1]/di
 $phoneElement = $Driver.FindElementByXPath('/html/body/div[4]/div[5]/div/div[1]/div[3]/div/div[1]/div[1]/div[3]/div[2]/dl/dd[1]/a/span');
 "CEO: " + $ceoElement.Text
 "Phone: " + $phoneElement.Text
+
+Stop-SeDriver -Target $Driver
